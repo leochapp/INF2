@@ -42,4 +42,30 @@ def coord():
 
 
 def tri(tab):
-    print( sorted(tab))
+    print(sorted(tab))
+
+
+def tri2(tab):
+    newtab = []
+    while len(tab) != 0:
+        mintab = min(tab)
+        for i in range(len(tab)):
+            if tab[i] == mintab:
+                newtab.append(tab[i])
+                tab.pop(i)
+    print(newtab)
+
+
+
+
+def tri3(tab):
+    for i in range(len(tab)):
+        for j in range(i, len(tab)):
+            if tab[i]>tab[j]:
+                nb = tab[i]
+                tab[i]=tab[j]
+                tab[j]=nb
+    print(tab)
+
+
+
