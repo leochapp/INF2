@@ -23,6 +23,12 @@ def fact(nombre):
         fact=fact*i
     print(fact)
 
+def fact2(nombre):
+    if nombre==1:
+        return nombre
+    else:
+        return nombre*fact2(nombre-1)
+
 
 def bisextile():
     annee = int(input("Veuillez rentrer une annee : "))
@@ -66,6 +72,3 @@ def tri3(tab):
                 tab[i]=tab[j]
                 tab[j]=nb
     print(tab)
-
-
-
