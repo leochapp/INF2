@@ -2,12 +2,13 @@
 
 def nombre(f):
     def wrapper(nombre):
-        ch = nombre #On récupère qu'un suel nombre ici
-        nb_fin = 0
-        try:
-            nb_fin += int(ch)
-        except:
-            nb_fin = 0
+        nb_fin = nombre #On récupère qu'un suel nombre ici
+        if type(nombre) != int:
+            try:
+                nb_fin += int(nb_fin)
+                #Raise ValueError("Le pramètre n'est pas un nombre")
+            except:
+                nb_fin = 0
         return f(nb_fin)
     return wrapper
 
