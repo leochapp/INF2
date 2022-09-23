@@ -2,7 +2,7 @@ import googlemaps
 
 class Gmap:
     def coordgps(adresse):
-        gmaps = googlemaps.Client(key='AIzaSyBTeRxf61DWGHagCM2SOVupUhdo2POEkxE')
+        gmaps = googlemaps.Client(key='')
         geocode_result = gmaps.geocode(adresse)
         lat = geocode_result[0]["geometry"]["location"]["lat"]
         lng = geocode_result[0]["geometry"]["location"]["lng"]
