@@ -1,20 +1,13 @@
-from TD2_1 import *
+from TP2 import *
 
+def palindrome_verif():
+    mot=str(input("Veuillez rentrer un mot : "))
 
+    if palindrome(mot) == True:
+        print(f"Le mot '{mot}' est un palindrome")
+    else:
+        print(f"Le mot '{mot}' n'est pas un palindrome")
 
-matrice = [[4,14,15,1],[9,7,6,12], [5,11,10,8],[16,2,3,13]]
+# palindrome_verif()
 
-
-
-C1= [[8, 1, 6], [3, 5, 7], [4, 9, 2]]
-C2 = [[21,7,17],[11,15,19],[13,23,9]]
-C3= [[30,39,48,1,10,19,28], [38,47,7,9,18,27,29],
-[46,6,8,17,26,35,37], [5,14,16,25,34,36,45],
-[13,15,24,33,42,44,4], [21,23,32,41,43,3,12],
-[22,31,40,49,2 ,11,20]]
-
-
-# affiche_test_cm(matrice, C1, C2, C3)
-
-print(somme_chiffre("38"))
-
+print(crypter("J'ai une adorable copine"))
