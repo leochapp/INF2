@@ -1,1 +1,4 @@
-from TP2 import *
+from calculatrice import *
+
+if __name__ == '__main__':
+    main()
