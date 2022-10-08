@@ -1,5 +1,4 @@
 from math import *
-
 from googlemaps import *
 
 
@@ -16,16 +15,16 @@ class Gmap:
 class Lieu():
 
     def __init__(self):
-        self.nom = str(input("Veuillez rentrer un nom : "))
-        self.adresse = str(input("Veuillez rentrer une adresse : "))
+        self.__nom = str(input("Veuillez rentrer un nom : "))
+        self.__adresse = str(input("Veuillez rentrer une adresse : "))
 
-        coord = Gmap.coordgps(self.adresse)
+        coord = Gmap.coordgps(self.__adresse)
 
         self.latitude = coord[0]
         self.longitude = coord[1]
 
     def detail(self):
-        print(f"Le lieu {self.nom} est situé au {self.adresse} et\na pour Latitude {self.latitude} \n et pour Longitude {self.longitude}")
+        print(f"Le lieu {self.__nom} est situé au {self.__adresse} et\na pour Latitude {self.latitude} \n et pour Longitude {self.longitude}")
 
 
 
@@ -34,7 +33,7 @@ class Lieu():
 
 # Exercice 2
 
-def property(f):
+def verif(f):
     def wrapper(self, nom, prenom, age, sexe):
         nom = str(nom)
         prenom = str(prenom)
@@ -54,29 +53,29 @@ def property(f):
 
 class Personne:
 
-    @property
+    @verif
     def __init__(self, nom, prenom, age, sexe):
-        self.nom = nom
-        self.prenom = prenom
-        self.age = age
-        self.sexe = sexe
+        self.__nom = nom
+        self.__prenom = prenom
+        self.__age = age
+        self.__sexe = sexe
 
     def getName(self):
-        return self.nom
+        return self.__nom
     def getPrenom(self):
-        return self.prenom
+        return self.__prenom
     def getAge(self):
-        return self.age
+        return self.__age
     def getSexe(self):
-        return self.sexe
+        return self.__sexe
     def sameLastName(self, Personne):
-        if self.nom == Personne.getName():
+        if self.__nom == Personne.getName():
             return True
         else:
             return False
     def oldest(self, Personne):
-        if self.age > Personne.getAge():
-            return self.prenom, self.nom
+        if self.__age > Personne.getAge():
+            return self.__prenom, self.__nom
         else:
             return Personne.getPrenom(), Personne.getName()
 
@@ -84,7 +83,7 @@ class Personne:
 
 # Exercice 3
 
-def property1(f):
+def verif1(f):
     def wrapper(self, a, b):
         if type(a) and type(b) != float:
             try:
@@ -115,34 +114,34 @@ def property1(f):
 class Point:
 
     def __init__(self):
-        self.abs = 0
-        self.ord = 0
+        self.__abs = 0
+        self.__ord = 0
 
     def getter(self):
-        return self.abs, self.ord
+        return self.__abs, self.__ord
 
-    @property1
+    @verif1
     def setter(self, abs, ord):
-        self.abs = abs
-        self.ord = ord
+        self.__abs = abs
+        self.__ord = ord
 
     def calculerDistance(self, p):
         coords = p.getter()
         abs2 = coords[0]
         ord2 = coords[1]
-        nb1 = (abs2-self.abs)**2
-        nb2 = (ord2-self.ord)**2
+        nb1 = (abs2 - self.__abs) ** 2
+        nb2 = (ord2 - self.__ord) ** 2
         return sqrt(nb1+nb2)
 
     def calculerMillieu(self, p):
         coords = p.getter()
         abs2 = coords[0]
         ord2 = coords[1]
-        return (abs2+self.abs)/2, (ord2+self.ord)/2
+        return (abs2 + self.__abs) / 2, (ord2 + self.__ord) / 2
 
 
 
-def property2(f):  # Vérifier que ce qui est passé à setter et __init__ sont bien des objets Point
+def verif2(f):  # Vérifier que ce qui est passé à setter et __init__ sont bien des objets Point
     def wrapper(self, pt1, pt2, pt3):
         if type(pt1) is Point == False: #Si la personne a rentré un tuple de 2 coord au lieu d'un objet point
             if type(pt1) is tuple and len(pt1) == 2:
@@ -179,28 +178,28 @@ def property2(f):  # Vérifier que ce qui est passé à setter et __init__ sont 
 
 class TroisPoints():
 
-    @property2
+    @verif2
     def __init__(self, premier, deuxieme, troisieme):
-        self.premier = premier
-        self.deuxieme = deuxieme
-        self.troisieme = troisieme
+        self.__premier = premier
+        self.__deuxieme = deuxieme
+        self.__troisieme = troisieme
 
     def getter(self):
-        tuple1 = self.premier.getter()
-        tuple2 = self.deuxieme.getter()
-        tuple3 = self.troisieme.getter()
+        tuple1 = self.__premier.getter()
+        tuple2 = self.__deuxieme.getter()
+        tuple3 = self.__troisieme.getter()
         return (tuple1, tuple2, tuple3)
 
-    @property2
+    @verif2
     def setter(self, premier, deuxieme, troisieme):
-        self.premier = premier
-        self.deuxieme = deuxieme
-        self.troisieme = troisieme
+        self.__premier = premier
+        self.__deuxieme = deuxieme
+        self.__troisieme = troisieme
 
     def sontAlignes(self):
-        AB = self.premier.calculerDistance(self.deuxieme)
-        AC = self.premier.calculerDistance(self.troisieme)
-        BC = self.deuxieme.calculerDistance(self.troisieme)
+        AB = self.__premier.calculerDistance(self.__deuxieme)
+        AC = self.__premier.calculerDistance(self.__troisieme)
+        BC = self.__deuxieme.calculerDistance(self.__troisieme)
         if (AC+BC == AB) or (AB+BC == AC) or (AB+AC == BC):
             align = True
         else:
@@ -208,9 +207,9 @@ class TroisPoints():
         return align
 
     def estIsocele(self):
-        AB = self.premier.calculerDistance(self.deuxieme)
-        AC = self.premier.calculerDistance(self.troisieme)
-        BC = self.deuxieme.calculerDistance(self.troisieme)
+        AB = self.__premier.calculerDistance(self.__deuxieme)
+        AC = self.__premier.calculerDistance(self.__troisieme)
+        BC = self.__deuxieme.calculerDistance(self.__troisieme)
         if (AB == AC) or (AB==BC) or (AC==BC):
             iso = True
         else:

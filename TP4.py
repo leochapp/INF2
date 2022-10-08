@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import pandas
+import pandas as pd
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -9,129 +9,159 @@ import csv
 import os
 
 
+
 # Exercice 1
 
-# def saisir():
-#     nb_add = int(input("Combien de candidats voulez-vous ajouter ? : "))
-#     file = open("concours.txt", "a")
-#     for i in range(nb_add):
-#         NCIM = int(input("Veuillez rentrer le NCIM : "))
-#         NOM = str(input("Veuillez rentrer le Nom : "))
-#         PRENOM = str(input("Veuillez rentrer le Prenom : "))
-#         AGE = int(input(f"Veuillez rentrer l'Age de {NOM} {PRENOM} "))
-#         dec = str(input(f"L'étudiant a-t-il été admis ? [y/n]"))
-#
-#         if dec != "y" or dec != "n":
-#             test = False
-#             while test == False:
-#                 dec = str(input("L'étudiant a-t-il été admis ? [y/n] "))
-#                 if dec == "n" or dec == "y":
-#                     test = True
-#         if dec == "y":
-#             DECISION = "admis"
-#         else:
-#             dec = str(input("L'étudiant a-t-il été ajourné ? [y/n] "))
-#             if dec != "y" or dec != "n":
-#                 test = False
-#                 while test == False:
-#                     dec = str(input("L'étudiant a-t-il été ajourné ? [y/n] "))
-#                     if dec == "n" or dec =="y":
-#                         test=True
-#             if dec == "y":
-#                 DECISION = "ajourné"
-#             else:
-#                 DECISION = "refusé"
-#
-#         file.write(f"{NCIM};{NOM};{PRENOM};{AGE};{DECISION}")
-#     file.close()
-#
-# def admis():
-#     file1 = open("concours.txt", "r")
-#     file2 = open("admis.txt", "")
-#
-#     lines = file1.readlines()
-#     for line in lines:
-#         if "admis" in line:
-#             file2.write(line)
-#     file1.close()
-#     file2.close()
-#
-# def attente():
-#     file1 = open("admis.txt", "r")
-#     file2 = open("attente.txt", "a")
-#     lines = file1.readlines()
-#     tab_age = []
-#     for line in lines: # Une ligne représente un candidat
-#         age = ""
-#         n = 0
-#         for car in line:
-#             if n == 3:
-#                 age += car
-#             if car == ";":
-#                 n += 1
-#         age = int(age[:(len(age)-1)])
-#         tab_age.append(age)
-#
-#     for i in range(len(lines)):
-#         n=0
-#         string = ""
-#         if tab_age[i]>=30:
-#             for car in lines[i]:
-#                 if car == ";":
-#                     n += 1
-#                 while n < 3:
-#                     string += car
-#         file2.write(string)
-#
-#     file1.close()
-#     file2.close()
-#
-# def statistiques(dec):
-#     if dec != "admis" or dec != "refusé" or dec != "ajourné":
-#          print("Valeur incorrecte !")
-#          test = False
-#          while test == False:
-#              dec = str(input("Veuillez rentrer soit 'admis', sot 'refusé' soit 'ajourné' pour consulter les statistiques"))
-#              if dec == "admis" or dec == "refusé" or dec == "ajourné":
-#                  test = True
-#     file1 = open("concours.txt", "r")
-#     lines = file1.readlines()
-#     tot = len(lines)
-#     nb_admis = 0
-#     nb_refus = 0
-#     nb_ajour = 0
-#     for line in lines:
-#         if "admis" in line:
-#             nb_admis += 1
-#         if "refusé" in line:
-#             nb_refus += 1
-#         if "ajourné" in line:
-#             nb_ajour += 1
-#
-#     tabresult=[(nb_admis/tot)*100,(nb_refus/tot)*100,(nb_ajour/tot)*100]
-#     matplotlib.figure(figsize=(8, 8))
-#     matplotlib.pie(tabresult, labels=['Admis', 'Refusés', 'Ajournés'], normalize=True)
-#     matplotlib.legend()
-#     file1.close()
-#
-# def supprimer():
-#     file1 = open("attente.txt", "r")
-#     file2 = open("admis.txt", "r+")
-#
-#     lines = file1.readlines()
-#     numbers = []
-#     for i in range(len(lines)):
-#         n = 0
-#         string =""
-#         for car in lines[i]:
-#             if car == ";":
-#                 n += 1
-#                 if n == 1:
-#                     numbers.append(string)
-#                     break
-#             if car == 0:
-#                 string += car
-#     for i in range
+def saisir():
+    nb_add = int(input("Combien de candidats voulez-vous ajouter ? : "))
+    NCIMtab = []
+    NOMtab = []
+    PRENOMtab = []
+    AGEtab = []
+    dectab = []
+
+    for i in range(nb_add):
+        NCIM = int(input(f"Veuillez rentrer le NCIM du {i+1}e candidat : "))
+        NOM = str(input("Veuillez rentrer le Nom : "))
+        PRENOM = str(input("Veuillez rentrer le Prenom : "))
+        AGE = int(input(f"Veuillez rentrer l'Age de {NOM} {PRENOM} "))
+        dec = str(input(f"L'étudiant a-t-il été admis ? [y/n]"))
+
+        if dec != "y" and dec != "n":
+            test = False
+            while test == False:
+                dec = str(input("L'étudiant a-t-il été admis ? [y/n] "))
+                if dec == "n" or dec == "y":
+                    test = True
+        if dec == "y":
+            DECISION = "admis"
+        else:
+            dec = str(input("L'étudiant a-t-il été ajourné ? [y/n] "))
+            if dec != "y" and dec != "n":
+                test = False
+                while test == False:
+                    dec = str(input("L'étudiant a-t-il été ajourné ? [y/n] "))
+                    if dec == "n" or dec =="y":
+                        test=True
+            if dec == "y":
+                DECISION = "ajourné"
+            else:
+                DECISION = "refusé"
+
+        NCIMtab.append(NCIM)
+        NOMtab.append(NOM)
+        PRENOMtab.append(PRENOM)
+        AGEtab.append(AGE)
+        dectab.append(dec)
+
+
+
+
+    NOMs = pd.Series(NOMtab,
+                     index=NCIMtab)
+    PRENOMs = pd.Series(PRENOMtab,
+                     index=NCIMtab)
+    AGEs = pd.Series(AGEtab,
+                     index=NCIMtab)
+    DECs = pd.Series(dectab,
+                     index=NCIMtab)
+
+    df = pd.DataFrame({"NOM" : NOMs,
+                       "PRENOM": PRENOMs,
+                       "AGE": AGEs,
+                       "DECISION": DECs})
+
+## Reste plus qu'à écrire dedans
+
+
+
+def admis():
+    file1 = open("concours.txt", "r")
+    file2 = open("admis.txt", "")
+
+    lines = file1.readlines()
+    for line in lines:
+        if "admis" in line:
+            file2.write(line)
+    file1.close()
+    file2.close()
+
+def attente():
+    file1 = open("admis.txt", "r")
+    file2 = open("attente.txt", "a")
+    lines = file1.readlines()
+    tab_age = []
+    for line in lines: # Une ligne représente un candidat
+        age = ""
+        n = 0
+        for car in line:
+            if n == 3:
+                age += car
+            if car == ";":
+                n += 1
+        age = int(age[:(len(age)-1)])
+        tab_age.append(age)
+
+    for i in range(len(lines)):
+        n=0
+        string = ""
+        if tab_age[i]>=30:
+            for car in lines[i]:
+                if car == ";":
+                    n += 1
+                while n < 3:
+                    string += car
+        file2.write(string)
+
+    file1.close()
+    file2.close()
+
+def statistiques(dec):
+    if dec != "admis" or dec != "refusé" or dec != "ajourné":
+         print("Valeur incorrecte !")
+         test = False
+         while test == False:
+             dec = str(input("Veuillez rentrer soit 'admis', sot 'refusé' soit 'ajourné' pour consulter les statistiques"))
+             if dec == "admis" or dec == "refusé" or dec == "ajourné":
+                 test = True
+    file1 = open("concours.txt", "r")
+    lines = file1.readlines()
+    tot = len(lines)
+    nb_admis = 0
+    nb_refus = 0
+    nb_ajour = 0
+    for line in lines:
+        if "admis" in line:
+            nb_admis += 1
+        if "refusé" in line:
+            nb_refus += 1
+        if "ajourné" in line:
+            nb_ajour += 1
+
+    tabresult=[(nb_admis/tot)*100,(nb_refus/tot)*100,(nb_ajour/tot)*100]
+    matplotlib.figure(figsize=(8, 8))
+    matplotlib.pie(tabresult, labels=['Admis', 'Refusés', 'Ajournés'], normalize=True)
+    matplotlib.legend()
+    file1.close()
+
+def supprimer():
+    file1 = open("attente.txt", "r")
+    file2 = open("admis.txt", "r+")
+
+    lines = file1.readlines()
+    numbers = []
+    for i in range(len(lines)):
+        n = 0
+        string =""
+        for car in lines[i]:
+            if car == ";":
+                n += 1
+                if n == 1:
+                    numbers.append(string)
+                    break
+            if car == 0:
+                string += car
+    # for i in range
 
 
 # Exercice 2 :

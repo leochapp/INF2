@@ -23,9 +23,9 @@ class Fenetre(Tk):
 
         # variables :
 
-        self.boutonValider = Button(self, text='=', command=self.valider)
+        # self.boutonValider = Button(self, text='=', command=self.valider)
 
-        self.labelValider = Label(self.boutonValider, text="Valider")
+        # self.labelValider = Label(self.boutonValider, text="Valider")
 
 
         self.bouton1 = Button(self, text="1", bg="cyan", borderwidth="2")
@@ -39,8 +39,8 @@ class Fenetre(Tk):
 
 
 
-    boutonInit = Button(text=' Initialiser',command=initialiser)
-    boutonInit.pack()
+    # boutonInit = Button(text=' Initialiser',command=initialiser)
+    # boutonInit.pack()
 
 
 
