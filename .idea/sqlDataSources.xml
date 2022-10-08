@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="7f09ac37-d65a-4d74-9cf3-ecbfba6fc676" name="alesc.sqlite@localhost Mapping">
+      <data-sources db="273b26a7-b79f-4d41-b976-5620005947fd" />
+      <scope>
+        <node kind="schema" qname="alesc.sql" />
+      </scope>
+    </mapping>
+  </component>
+</project>
