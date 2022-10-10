@@ -69,17 +69,17 @@ def saisir():
     Dataframe.to_csv('concours.txt', sep=';', index=False)
 
 def admis():
-    data = pd.read_csv('concours.txt', sep=';')
+    data = pd.read_csv('TP4/concours.txt', sep=';')
     new_data = data.loc[data.DECISION == "admis"]
     new_data.to_csv('admis.txt', sep=';', index=False)
 
 def attente():
-    data = pd.read_csv('admis.txt', sep=';')
+    data = pd.read_csv('TP4/admis.txt', sep=';')
     new_data = data.loc[data.AGE > 30]
     new_data.to_csv('attente.txt', sep=';', index=False)
 
 def statistiques():
-    data = pd.read_csv('concours.txt', sep=';')
+    data = pd.read_csv('TP4/concours.txt', sep=';')
     rows = len(data.axes[0])
     stats = data.DECISION.value_counts()
     try:
@@ -107,7 +107,7 @@ def statistiques():
     plt.show()
 
 def supprimer():
-    data = pd.read_csv('admis.txt', sep=';')
+    data = pd.read_csv('TP4/admis.txt', sep=';')
     new_data = data.loc[data.AGE <= 30]
     new_data.to_csv('admis.txt', sep=';', index=False)
 
@@ -117,7 +117,7 @@ def principal():
     val = True
     if test0 == 'n':
         try:
-            data = pd.read_csv('concours.txt', sep=';')
+            data = pd.read_csv('TP4/concours.txt', sep=';')
             rows = len(data.axes[0])
             if rows == 0:
                 val = False
@@ -198,7 +198,7 @@ def saisirExo3():
         imcos.append(cos(i))
 
     os.chdir(r"/")
-    file1 = open('../math.csv', "r+")
+    file1 = open('math.csv', "r+")
     ecrire = csv.writer(file1)
     ecrire.writerow(x)
     ecrire.writerow(imcos)
@@ -207,7 +207,7 @@ def saisirExo3():
 def lire():
     global x, imcos
     os.chdir(r"/")
-    file1 = open('../math.csv', "r+")
+    file1 = open('math.csv', "r+")
     lire = csv.reader(file1)
 
 
