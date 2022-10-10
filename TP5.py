@@ -1,8 +1,6 @@
 import tkinter.ttk
 from tkinter import *
 from math import *
-from tkinter import messagebox, ttk
-
 
 class Fenetre(Tk):
 
