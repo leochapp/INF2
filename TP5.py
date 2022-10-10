@@ -231,10 +231,17 @@ class Fenetre(Tk):
         self.var.set(temp)
 
     def pi(self):
+        ch = self.var.get()
+        max = len(ch) - 1
+
         if "=" in self.var.get():
             self.var.set('')
-        temp = self.var.get() + 'pi'
-        self.var.set(temp)
+        if ch[max].isdigit():
+            temp = self.var.get() + '*pi'
+            self.var.set(temp)
+        else:
+            temp = self.var.get() + 'pi'
+            self.var.set(temp)
 
     def add1(self):
         if "=" in self.var.get():
