@@ -1,4 +1,5 @@
 from random import *
+
 #Exercice 1
 class Rectangle:
     def __init__(self, longueur, largeur):
@@ -31,29 +32,124 @@ class Rectangle:
 
     def isBigger(self, rectangle_other):
         if rectangle_other.aire() > self.aire():
-            return rectangle_other
-        elif rectangle_other.aire() == self.aire():
-            return rectangle_other # ce sont les même peu importe
+            return print(f"Le rectangle de dimension {rectangle_other.getLongueur()}x{rectangle_other.getLargeur()} est plus grand")
+        elif rectangle_other.aire() < self.aire():
+            return print(f"Le rectangle de dimension {self.__longueur}x{self.__largeur} est plus grand")
         else:
-            return self
+            return print(f"Les deux rectangles sont de même taille : {rectangle_other.getLongueur()}x{rectangle_other.getLargeur()}")
+
 
     def detail(self):
         is_carre = False
         if self.__longueur == self.__largeur:
             is_carre = True
         if is_carre:
-            print(f"Longueur : [{self.__longueur}] - Largeur : [{self.__largeur} - Périmètre : [{self.perimetre()}] - Aire : [{self.aire()}] - C'est un carré")
+            print(f"Longueur : [{self.__longueur}] - Largeur : [{self.__largeur}] - Périmètre : [{self.perimetre()}] - Aire : [{self.aire()}] - C'est un carré")
         else:
-            print(f"Longueur : [{self.__longueur}] - Largeur : [{self.__largeur} - Périmètre : [{self.perimetre()}] - Aire : [{self.aire()}] - Ce n'est pas un carré")
+            print(f"Longueur : [{self.__longueur}] - Largeur : [{self.__largeur}] - Périmètre : [{self.perimetre()}] - Aire : [{self.aire()}] - Ce n'est pas un carré")
 
-# def main1():
+def main1():
+    rectangle1 = Rectangle(12, 6)
+    rectangle2 = Rectangle(2,2)
+    rectangle3 = Rectangle(12,4)
+    print(rectangle3.isBigger(rectangle2))
+    # rectangle2.detail()
+    # rectangle1.detail()
 
 
 #Exo 2
 
+class PoupeeRusse:
+    def __init__(self, nom, taille):
+        self.__nom = nom
+        self.__taille = taille
+        self.__ouverte = 0
+        self.__dans = None
+        self.__contient = None
 
+    @property
+    def getNom(self):
+        return self.__nom
 
+    @property
+    def getTaille(self):
+        return self.__taille
 
+    @property
+    def getOuverte(self):
+        return self.__ouverte
+
+    @property
+    def getDans(self):
+        return self.__dans
+
+    @property
+    def getContient(self):
+        return self.__contient
+
+    @getNom.setter
+    def nom(self, nom):
+        self.__nom = nom
+
+    @getTaille.setter
+    def taille(self, taille):
+        self.__taille = taille
+
+    @getOuverte.setter
+    def ouvert(self, state):
+        self.__ouverte = state
+
+    @getDans.setter
+    def dans(self, dans):
+        self.__dans = dans
+
+    @getContient.setter
+    def contient(self, contient):
+        self.__contient = contient
+
+    def ouvrir(self):
+        if self.__dans == None and self.__ouverte == False:
+            self.__ouverte = 1
+
+    def fermer(self):
+        if self.__contient == None and self.ouvert == True:
+            self.__ouverte = 0
+
+    def placer_dans(self, p):
+        if self.__dans == None and self.__contient == None and self.__ouverte == 0 and p.getOuverte() == 1 and p.getTaille()>self.__taille:
+            self.dans = p
+            p.contient = self
+        else:
+            print("Action impossible")
+
+    def sortir_de(self, p):
+        if self.__dans == p and p.getOuverte() == 1:
+            self.__dans = None
+
+    def detail(self):
+        if self.__dans == None:
+            dans = "aucune"
+        else:
+            dans = self.__dans.getNom()
+        if self.__ouverte == 0:
+            state = "fermée"
+        else:
+            state = "ouverte"
+        if self.__contient == None:
+            contient = "aucune"
+        else:
+            contient = self.__contient.getNom()
+
+        print(f"Le nom de la poupée actuele est {self.__nom}, elle est de taille {self.__taille}\nElle est actuellement {state} et elle placée dans {dans} poupée et contient {contient}")
+
+def main2():
+    poupee1 = PoupeeRusse("Jam", 2)
+    poupee2 = PoupeeRusse("Jack", 1)
+    poupee1.ouvrir()
+    poupee1.detail()
+    poupee2.placer_dans(poupee1)
+    poupee1.fermer()
+    poupee2.detail()
 
 # Exercice 3
 
@@ -207,7 +303,7 @@ class PokemonPlante(Pokemon):
                 hp_pok2 = 0
             Pokemon_p.Np = hp_pok2
 
-def main():
+def main3():
     poke1 = PokemonPlante("Bulb", 100, 20)
     poke2 = PokemonFeu("DracoFeu", 100, 90)
     while poke1.getNp != 0 and poke2.getNp !=0:
