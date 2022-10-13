@@ -2,6 +2,8 @@ import tkinter.ttk
 from tkinter import *
 from math import *
 
+
+
 class Fenetre(Tk):
 
     def __init__(self):
@@ -120,7 +122,6 @@ class Fenetre(Tk):
 
         bouton_historic = Button(text="H", bg="cyan", height=2, width=4, borderwidth=4, command=self.msg)
         bouton_historic.pack(side=RIGHT, padx=1)
-
 
 
 

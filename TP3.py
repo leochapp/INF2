@@ -1,217 +1,219 @@
-from math import *
-from googlemaps import *
+from random import *
+#Exercice 1
+class Rectangle:
+    def __init__(self, longueur, largeur):
+         self.__longueur = longueur
+         self.__largeur = largeur
 
+    def setLargeur(self, largeur):
+        if type(self.__largeur) == float:
+            self.__largeur = largeur
+        else:
+            raise TypeError("La largeur doit être de type float ")
 
-# Exercice 1
+    def setLongueur(self, longueur):
+        if type(self.__longueur) == float:
+            self.__longueur = longueur
+        else:
+            raise TypeError("La longueur doit être de type float ")
 
-class Gmap:
-    def coordgps(adress):
-        gmaps = Client(key='AIzaSyBTeRxf61DWGHagCM2SOVupUhdo2POEkxE')
-        geocode_result = gmaps.geocode(adress)
-        lat = geocode_result[0]["geometry"]["location"]["lat"]
-        lng = geocode_result[0]["geometry"]["location"]["lng"]
-        return lat,lng
+    def getLargeur(self):
+        return self.__largeur
 
-class Lieu():
+    def getLongueur(self):
+        return self.__longueur
 
-    def __init__(self):
-        self.__nom = str(input("Veuillez rentrer un nom : "))
-        self.__adresse = str(input("Veuillez rentrer une adresse : "))
+    def perimetre(self):
+        return (2*self.__longueur + 2*self.__largeur)
 
-        coord = Gmap.coordgps(self.__adresse)
+    def aire(self):
+        return (self.__longueur*self.__largeur)
 
-        self.latitude = coord[0]
-        self.longitude = coord[1]
+    def isBigger(self, rectangle_other):
+        if rectangle_other.aire() > self.aire():
+            return rectangle_other
+        elif rectangle_other.aire() == self.aire():
+            return rectangle_other # ce sont les même peu importe
+        else:
+            return self
 
     def detail(self):
-        print(f"Le lieu {self.__nom} est situé au {self.__adresse} et\na pour Latitude {self.latitude} \n et pour Longitude {self.longitude}")
-
-
-
-
-
-
-# Exercice 2
-
-def verif(f):
-    def wrapper(self, nom, prenom, age, sexe):
-        nom = str(nom)
-        prenom = str(prenom)
-        if type(age) !=  int:
-            verif = False
-            while verif ==False:
-                try:
-                    age = int(input(f"Veuillez rentrer une valeur valide pour l'age de {prenom} : "))
-                    verif = True
-                except:
-                    print("Veuillez réessayer")
-                    verif = False
-        sexe = str(sexe)
-        func = f(self, nom, prenom, age, sexe)
-        return func
-    return wrapper
-
-class Personne:
-
-    @verif
-    def __init__(self, nom, prenom, age, sexe):
-        self.__nom = nom
-        self.__prenom = prenom
-        self.__age = age
-        self.__sexe = sexe
-
-    def getName(self):
-        return self.__nom
-    def getPrenom(self):
-        return self.__prenom
-    def getAge(self):
-        return self.__age
-    def getSexe(self):
-        return self.__sexe
-    def sameLastName(self, Personne):
-        if self.__nom == Personne.getName():
-            return True
+        is_carre = False
+        if self.__longueur == self.__largeur:
+            is_carre = True
+        if is_carre:
+            print(f"Longueur : [{self.__longueur}] - Largeur : [{self.__largeur} - Périmètre : [{self.perimetre()}] - Aire : [{self.aire()}] - C'est un carré")
         else:
-            return False
-    def oldest(self, Personne):
-        if self.__age > Personne.getAge():
-            return self.__prenom, self.__nom
-        else:
-            return Personne.getPrenom(), Personne.getName()
+            print(f"Longueur : [{self.__longueur}] - Largeur : [{self.__largeur} - Périmètre : [{self.perimetre()}] - Aire : [{self.aire()}] - Ce n'est pas un carré")
+
+# def main1():
+
+
+#Exo 2
+
+
 
 
 
 # Exercice 3
 
-def verif1(f):
-    def wrapper(self, a, b):
-        if type(a) and type(b) != float:
-            try:
-                a = float(a)
-                b = float(b)
-            except:
-                verifa = False
-                verifb = False
-                print("Valeur incorrecte \n ====================================== ")
-                if type(a) == float:
-                    while verifb == False:
-                        try:
-                            b= float(input("Veuillez rentrer une valeur correcte pour le nombre 1 : "))
-                            verifb = True
-                        except:
-                            verifb = False
+class Pokemon:
+    def __init__(self, nom, np, atk):
+        self.__nom = nom
+        self.__np = np
+        self.__atk = atk
 
-                if type(b) == float:
-                    while verifa == False:
-                        try:
-                            b= float(input("Veuillez rentrer une valeur correcte pour le nombre 2 : "))
-                            verifa = True
-                        except:
-                            verifa = False
-        return f(self, a, b)
-    return wrapper
+    @property
+    def getNom(self):
+        return self.__nom
 
-class Point:
+    @property
+    def getNp(self):
+        return self.__np
 
-    def __init__(self):
-        self.__abs = 0
-        self.__ord = 0
+    @property
+    def getAtk(self):
+        return self.__atk
 
-    def getter(self):
-        return self.__abs, self.__ord
+    @getNom.setter
+    def Nom(self, nom):
+        self.__nom = nom
 
-    @verif1
-    def setter(self, abs, ord):
-        self.__abs = abs
-        self.__ord = ord
-
-    def calculerDistance(self, p):
-        coords = p.getter()
-        abs2 = coords[0]
-        ord2 = coords[1]
-        nb1 = (abs2 - self.__abs) ** 2
-        nb2 = (ord2 - self.__ord) ** 2
-        return sqrt(nb1+nb2)
-
-    def calculerMillieu(self, p):
-        coords = p.getter()
-        abs2 = coords[0]
-        ord2 = coords[1]
-        return (abs2 + self.__abs) / 2, (ord2 + self.__ord) / 2
-
-
-
-def verif2(f):  # Vérifier que ce qui est passé à setter et __init__ sont bien des objets Point
-    def wrapper(self, pt1, pt2, pt3):
-        if type(pt1) is Point == False: #Si la personne a rentré un tuple de 2 coord au lieu d'un objet point
-            if type(pt1) is tuple and len(pt1) == 2:
-                nb = pt1
-                pt1 = Point
-                pt1.setter(nb[0], nb[1])
-            else:
-                print("Veuillez renseigner des coordonnées valables pour le point 1 ")
-                abs = input("Veuillez renseigner l'absice : ")
-                ord = input("Veuillez renseigner l'ordonnée : ")
-                pt1.setter(abs, ord)
-        if type(pt2) is Point == False: #Si la personne a rentré un tuple de 2 coord au lieu d'un objet point
-            if type(pt2) is tuple and len(pt2) == 2:
-                nb = pt2
-                pt2 = Point
-                pt2.setter(nb[0], nb[1])
-            else:
-                print("Veuillez renseigner des coordonnées valables pour le point 2 ")
-                abs = input("Veuillez renseigner l'absice : ")
-                ord = input("Veuillez renseigner l'ordonnée : ")
-                pt2.setter(abs, ord)
-        if type(pt3) is Point == False:  # Si la personne a rentré un tuple de 2 coord au lieu d'un objet point
-            if type(pt3) is tuple and len(pt3) == 2:
-                nb = pt3
-                pt3 = Point
-                pt3.setter(nb[0], nb[1])
-            else:
-                print("Veuillez renseigner des coordonnées valables pour le point 3 ")
-                abs = input("Veuillez renseigner l'absice : ")
-                ord = input("Veuillez renseigner l'ordonnée : ")
-                pt1.setter(abs, ord)
-        return f(self, pt1, pt2, pt3)
-    return wrapper
-
-class TroisPoints():
-
-    @verif2
-    def __init__(self, premier, deuxieme, troisieme):
-        self.__premier = premier
-        self.__deuxieme = deuxieme
-        self.__troisieme = troisieme
-
-    def getter(self):
-        tuple1 = self.__premier.getter()
-        tuple2 = self.__deuxieme.getter()
-        tuple3 = self.__troisieme.getter()
-        return (tuple1, tuple2, tuple3)
-
-    @verif2
-    def setter(self, premier, deuxieme, troisieme):
-        self.__premier = premier
-        self.__deuxieme = deuxieme
-        self.__troisieme = troisieme
-
-    def sontAlignes(self):
-        AB = self.__premier.calculerDistance(self.__deuxieme)
-        AC = self.__premier.calculerDistance(self.__troisieme)
-        BC = self.__deuxieme.calculerDistance(self.__troisieme)
-        if (AC+BC == AB) or (AB+BC == AC) or (AB+AC == BC):
-            align = True
+    @getNp.setter
+    def Np(self, np):
+        if np < 0:
+            raise ValueError
         else:
-            align = False
-        return align
+            self.__np = np
 
-    def estIsocele(self):
-        AB = self.__premier.calculerDistance(self.__deuxieme)
-        AC = self.__premier.calculerDistance(self.__troisieme)
-        BC = self.__deuxieme.calculerDistance(self.__troisieme)
-        if (AB == AC) or (AB==BC) or (AC==BC):
-            iso = True
+    @getAtk.setter
+    def Atk(self, atk):
+        self.__atk = atk
+
+    def is_dead(self):
+        if self.__np == 0:
+            return True
         else:
-            iso = False
-        return iso
+            return False
+
+    def attaquer(self, Pokemon_p):
+        hp_pok2 = Pokemon_p.getNp
+        rand = random()
+        atk_2 = rand * Pokemon_p.getAtk
+        hp_pok2 -= atk_2
+        if hp_pok2<0:
+            hp_pok2 = 0
+        Pokemon_p.Np = hp_pok2
+
+    def combat(self, Pokemon_p):
+        Pokemon_p.attaquer(self)
+        self.attaquer(Pokemon_p)
+
+    def detail(self):
+        return self.__nom, self.__np, self.__atk
+
+class PokemonFeu(Pokemon):
+    def __init__(self, nom, np, atk):
+        super().__init__(nom, np, atk)
+
+
+    def attaquer(self, Pokemon_p):
+        if isinstance(Pokemon_p, PokemonPlante) == True:
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = 2 * rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+        elif isinstance(Pokemon_p, Pokemon):
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+        elif isinstance(Pokemon_p, PokemonEau) or isinstance(Pokemon_p, PokemonFeu):
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = 0.5*rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+class PokemonEau(Pokemon):
+    def __init__(self, nom, np, atk):
+        super().__init__(nom, np, atk)
+
+    def attaquer(self, Pokemon_p):
+        if isinstance(Pokemon_p, PokemonFeu) == True:
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = 2 * rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+        elif isinstance(Pokemon_p, Pokemon):
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+        elif isinstance(Pokemon_p, PokemonEau) or isinstance(Pokemon_p, PokemonPlante):
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = 0.5*rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+class PokemonPlante(Pokemon):
+    def __init__(self, nom, np, atk):
+        super().__init__(nom, np, atk)
+
+    def attaquer(self, Pokemon_p):
+        if isinstance(Pokemon_p, PokemonEau) == True:
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = 2 * rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+        elif isinstance(Pokemon_p, Pokemon):
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+        elif isinstance(Pokemon_p, PokemonPlante) or isinstance(Pokemon_p, PokemonFeu):
+            hp_pok2 = Pokemon_p.getNp
+            rand = random()
+            atk_2 = 0.5*rand * Pokemon_p.getAtk
+            hp_pok2 -= atk_2
+            if hp_pok2 < 0:
+                hp_pok2 = 0
+            Pokemon_p.Np = hp_pok2
+
+def main():
+    poke1 = PokemonPlante("Bulb", 100, 20)
+    poke2 = PokemonFeu("DracoFeu", 100, 90)
+    while poke1.getNp != 0 and poke2.getNp !=0:
+        poke1.combat(poke2)
+    if poke1.getNp != 0:
+        print(f"Le pokémon {poke1.getNom} a gagné face à {poke2.getNom} et il lui restait {poke1.getNp} points de vie")
+    else:
+        print(f"Le pokémon {poke2.getNom} a gagné face à {poke1.getNom} et il lui restait {poke2.getNp} points de vie")
+
