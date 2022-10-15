@@ -32,11 +32,11 @@ class Rectangle:
 
     def isBigger(self, rectangle_other):
         if rectangle_other.aire() > self.aire():
-            return print(f"Le rectangle de dimension {rectangle_other.getLongueur()}x{rectangle_other.getLargeur()} est plus grand")
+            return (f"Le rectangle de dimension {rectangle_other.getLongueur()}x{rectangle_other.getLargeur()} est plus grand")
         elif rectangle_other.aire() < self.aire():
-            return print(f"Le rectangle de dimension {self.__longueur}x{self.__largeur} est plus grand")
+            return (f"Le rectangle de dimension {self.__longueur}x{self.__largeur} est plus grand")
         else:
-            return print(f"Les deux rectangles sont de même taille : {rectangle_other.getLongueur()}x{rectangle_other.getLargeur()}")
+            return (f"Les deux rectangles sont de même taille : {rectangle_other.getLongueur()}x{rectangle_other.getLargeur()}")
 
 
     def detail(self):
@@ -53,8 +53,8 @@ def main1():
     rectangle2 = Rectangle(2,2)
     rectangle3 = Rectangle(12,4)
     print(rectangle3.isBigger(rectangle2))
-    # rectangle2.detail()
-    # rectangle1.detail()
+    rectangle2.detail()
+    rectangle1.detail()
 
 
 #Exo 2
@@ -108,48 +108,51 @@ class PoupeeRusse:
         self.__contient = contient
 
     def ouvrir(self):
-        if self.__dans == None and self.__ouverte == False:
+        if self.__dans == None and self.__ouverte == 0:
             self.__ouverte = 1
 
     def fermer(self):
-        if self.__contient == None and self.ouvert == True:
+        if self.__contient == None and self.ouvert == 1:
             self.__ouverte = 0
 
     def placer_dans(self, p):
-        if self.__dans == None and self.__contient == None and self.__ouverte == 0 and p.getOuverte() == 1 and p.getTaille()>self.__taille:
+        taille = p.getTaille
+        if self.__dans == None and self.__contient == None and self.__ouverte == 0 and p.getOuverte == 1 and taille > self.__taille:
             self.dans = p
             p.contient = self
         else:
             print("Action impossible")
 
     def sortir_de(self, p):
-        if self.__dans == p and p.getOuverte() == 1:
+        if self.__dans == p and p.getOuverte == 1:
             self.__dans = None
 
     def detail(self):
-        if self.__dans == None:
-            dans = "aucune"
+        if isinstance(self.__dans, PoupeeRusse):
+            dans = self.__dans.getNom
         else:
-            dans = self.__dans.getNom()
+            dans = "aucune"
         if self.__ouverte == 0:
             state = "fermée"
         else:
             state = "ouverte"
-        if self.__contient == None:
-            contient = "aucune"
+        if isinstance(self.__contient, PoupeeRusse):
+            contient = self.__contient.getNom
         else:
-            contient = self.__contient.getNom()
+            contient = "aucune"
 
-        print(f"Le nom de la poupée actuele est {self.__nom}, elle est de taille {self.__taille}\nElle est actuellement {state} et elle placée dans {dans} poupée et contient {contient}")
+        print(f"Le nom de la poupée actuelle est {self.__nom}, elle est de taille {self.__taille}\nElle est actuellement {state} et elle placée dans {dans} poupée et contient {contient}")
 
 def main2():
-    poupee1 = PoupeeRusse("Jam", 2)
-    poupee2 = PoupeeRusse("Jack", 1)
+    poupee1 = PoupeeRusse("Dave", 2)
+    poupee2 = PoupeeRusse("Winnie", 1)
     poupee1.ouvrir()
-    poupee1.detail()
     poupee2.placer_dans(poupee1)
     poupee1.fermer()
+    poupee1.detail()
     poupee2.detail()
+
+
 
 # Exercice 3
 
