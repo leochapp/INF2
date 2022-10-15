@@ -1,4 +1,4 @@
-from TP3 import *
+from TP5 import *
 
 if __name__ == '__main__':
-    main2()
+    main()
