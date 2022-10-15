@@ -124,7 +124,7 @@ class Fenetre(Tk):
         bouton_recap = Button(text="R", bg="cyan", height=2, width=4, borderwidth=4, command=self.msg)
         bouton_recap.pack(side=LEFT, padx=1)
 
-        bouton_SUPP = Button(text="<-", bg="cyan", height=2, width=4, borderwidth=4, command=self.supp)
+        bouton_SUPP = Button(text="<=", bg="cyan", height=2, width=4, borderwidth=4, command=self.supp)
         bouton_SUPP.pack(side=RIGHT, padx=1)
 
 
@@ -163,12 +163,12 @@ class Fenetre(Tk):
             temp = "sin(" + self.var.get()
             self.var.set(temp)
         else:
-            operator = ["*", "/", "+", "-"]
+            operator = ["x", "/", "+", "-"]
             ch = self.var.get()
             max = len(ch) - 1
             if max != -1:
                 if ch[max] not in operator:
-                    temp = self.var.get() + "*sin("
+                    temp = self.var.get() + "xsin("
                     self.var.set(temp)
                 else:
                     temp = self.var.get() + "sin("
@@ -187,12 +187,12 @@ class Fenetre(Tk):
             temp = "cos(" + self.var.get()
             self.var.set(temp)
         else:
-            operator = ["*", "/", "+", "-"]
+            operator = ["x", "/", "+", "-"]
             ch = self.var.get()
             max = len(ch) - 1
             if max != -1:
                 if ch[max] not in operator:
-                    temp = self.var.get() + "*cos("
+                    temp = self.var.get() + "xcos("
                     self.var.set(temp)
                 else:
                     temp = self.var.get() + "cos("
@@ -210,12 +210,12 @@ class Fenetre(Tk):
             temp = "tan(" + self.var.get()
             self.var.set(temp)
         else:
-            operator = ["*", "/", "+", "-"]
+            operator = ["x", "/", "+", "-"]
             ch = self.var.get()
             max = len(ch) - 1
             if max != -1:
                 if ch[max] not in operator:
-                    temp = self.var.get() + "*tan("
+                    temp = self.var.get() + "xtan("
                     self.var.set(temp)
                 else:
                     temp = self.var.get() + "tan("
@@ -230,21 +230,21 @@ class Fenetre(Tk):
             index = ch.find('=')
             ch = ch[index + 2:]
             self.var.set(ch)
-            temp = "sqrt(" + self.var.get()
+            temp = "√(" + self.var.get()
             self.var.set(temp)
         else:
-            operator = ["*","/","+","-"]
+            operator = ["x","/","+","-"]
             ch = self.var.get()
             max = len(ch)-1
             if max != -1:
                 if ch[max] not in operator:
-                    temp = self.var.get() + "*sqrt("
+                    temp = self.var.get() + "x√("
                     self.var.set(temp)
                 else:
-                    temp = self.var.get() + "sqrt("
+                    temp = self.var.get() + "√("
                     self.var.set(temp)
             else:
-                temp = self.var.get() + "sqrt("
+                temp = self.var.get() + "√("
                 self.var.set(temp)
 
     def carr(self):
@@ -254,7 +254,7 @@ class Fenetre(Tk):
             ch = ch[index + 2:]
             self.var.set(ch)
 
-        temp = self.var.get() + "**2"
+        temp = self.var.get() + "²"
         self.var.set(temp)
 
     def pi(self):
@@ -315,7 +315,7 @@ class Fenetre(Tk):
             index = ch.find('=')
             ch = ch[index+2:]
             self.var.set(ch)
-        temp = self.var.get() + '*'
+        temp = self.var.get() + 'x'
         self.var.set(temp)
 
     def div(self):
@@ -348,14 +348,15 @@ class Fenetre(Tk):
                     temp = self.var.get() + ')'
                     self.var.set(temp)
 
-
             #idée de simplification à développer
-            # chaine = chaine.replace('²', '**2')
             # chaine = chaine.replace('x', "*")
-            # chaine = chaine.replace('√', 'sqrt')
 
             chaine = self.var.get()
             calcul = self.var.get()
+
+            calcul = calcul.replace("√", "sqrt")
+            calcul = calcul.replace('²', "**2")
+            calcul = calcul.replace('x',"*")
 
             if self.ang.get() == "rad":
                 # Traitement sur les angles en rad ( cos, sin et tan )
