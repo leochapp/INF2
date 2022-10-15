@@ -10,7 +10,7 @@ class Fenetre(Tk):
     def __init__(self):
         super().__init__()
         self.title("Calculatrice")
-        label_welcome = Label(self, text="Calculatrice")
+        label_welcome = Label(self, text="Calculatrice", bg="#c8d6e5")
         label_welcome.pack( )
 
         ecran_x = self.winfo_screenwidth()
@@ -55,7 +55,7 @@ class Fenetre(Tk):
         for i in range(1,10): # <--  Génération boutons 1 à 9
             if col not in [0,1,2]:
                 col = 0
-            bouton = Button(bottom, height=3, width=5, text=str(i), bg="cyan", borderwidth=4, command=partial(self.addx, i), relief="raised")
+            bouton = Button(bottom, height=3, width=5, text=str(i), bg="#8395a7", borderwidth=4, command=partial(self.addx, i), relief="raised")
             bouton.grid(sticky=W, padx=2, pady=2, row=row,column=col)
             col += 1
             if i == 3:
@@ -64,67 +64,67 @@ class Fenetre(Tk):
                 row = 3
 
 
-        bouton_par1 = Button(bottom, height=3, width=5, text='(', bg="cyan", borderwidth=4, command=self.par1,relief="raised")
+        bouton_par1 = Button(bottom, height=3, width=5, text='(', bg="#576574", borderwidth=4, command=self.par1,relief="raised")
         bouton_par1.grid(row=0, column=0, sticky=W, padx=2, pady=2)
 
-        bouton_par2 = Button(bottom, height=3, width=5, text=')', bg="cyan", borderwidth=4, command=self.par2,relief="raised")
+        bouton_par2 = Button(bottom, height=3, width=5, text=')', bg="#576574", borderwidth=4, command=self.par2,relief="raised")
         bouton_par2.grid(row=0, column=1, sticky=W, padx=2, pady=2)
 
-        bouton0 = Button(bottom, height=3, width=5, text='0', bg="cyan", borderwidth=4, command=partial(self.addx, 0), relief="raised")
+        bouton0 = Button(bottom, height=3, width=5, text='0', bg="#8395a7", borderwidth=4, command=partial(self.addx, 0), relief="raised")
         bouton0.grid(row=4,column=1, sticky=W, padx=2, pady=2)
 
-        bouton_pi = Button(bottom, height=3, width=5, text='π', bg="cyan", borderwidth=4, command=self.pi, relief="raised")
+        bouton_pi = Button(bottom, height=3, width=5, text='π', bg="#576574", borderwidth=4, command=self.pi, relief="raised")
         bouton_pi.grid(row=0,column=2, sticky=W, padx=2, pady=2)
 
-        bouton_carr = Button(bottom, height=3, width=5, text='²', bg="cyan", borderwidth=4, command=self.carr, relief="raised")
+        bouton_carr = Button(bottom, height=3, width=5, text='²', bg="#576574", borderwidth=4, command=self.carr, relief="raised")
         bouton_carr.grid(row=0, column=3, sticky=W, padx=2, pady=2)
 
-        bouton_sqrt = Button(bottom, height=3, width=5, text='√', bg="cyan", borderwidth=4, command=self.sqrt, relief="raised")
+        bouton_sqrt = Button(bottom, height=3, width=5, text='√', bg="#576574", borderwidth=4, command=self.sqrt, relief="raised")
         bouton_sqrt.grid(row=1, column=3, sticky=W, padx=2, pady=2)
 
-        bouton_add = Button(bottom, height=3, width=5, text='+', bg="yellow", borderwidth=4, command=self.add, relief="raised")
+        bouton_add = Button(bottom, height=3, width=5, text='+', bg="#feca57", borderwidth=4, command=self.add, relief="raised")
         bouton_add.grid(row=1,column=4, sticky=W, padx=2, pady=2)
 
-        bouton_min = Button(bottom, height=3, width=5, text='-', bg="yellow", borderwidth=4, command=self.min, relief="raised")
+        bouton_min = Button(bottom, height=3, width=5, text='-', bg="#feca57", borderwidth=4, command=self.min, relief="raised")
         bouton_min.grid(row=2,column=4, sticky=W, padx=2, pady=2)
 
-        bouton_mult = Button(bottom, height=3, width=5, text='x', bg="yellow", borderwidth=4, command=self.mult, relief="raised")
+        bouton_mult = Button(bottom, height=3, width=5, text='x', bg="#feca57", borderwidth=4, command=self.mult, relief="raised")
         bouton_mult.grid(row=3,column=4, sticky=W, padx=2, pady=2)
 
-        bouton_div = Button(bottom, height=3, width=5, text='/', bg="yellow", borderwidth=4, command=self.div, relief="raised")
+        bouton_div = Button(bottom, height=3, width=5, text='/', bg="#feca57", borderwidth=4, command=self.div, relief="raised")
         bouton_div.grid(row=4,column=4, sticky=W, padx=2, pady=2)
 
-        bouton_egal = Button(bottom, height=3, width=5, text='=', bg="red", borderwidth=4, command=self.egal, relief="raised")
+        bouton_egal = Button(bottom, height=3, width=5, text='=', bg="#10ac84", borderwidth=4, command=self.egal, relief="raised")
         bouton_egal.grid(row=4,column=0, sticky=W, padx=2, pady=2)
 
-        bouton_pt = Button(bottom, height=3, width=5, text='.', bg="cyan", borderwidth=4, command=self.pt, relief="raised")
+        bouton_pt = Button(bottom, height=3, width=5, text='.', bg="#576574", borderwidth=4, command=self.pt, relief="raised")
         bouton_pt.grid(row=4, column=2, sticky=W, padx=2, pady=2)
 
         bouton_clear = Button(bottom, height=3, width=5, text='C', bg="white", borderwidth=4, command=self.clear, relief="raised")
         bouton_clear.grid(column=4, row=0, sticky=W, padx=2, pady=2)
 
-        bouton_sin = Button(bottom, height=3, width=5, text='sin', bg="cyan", borderwidth=4, command=self.sin, relief="raised")
+        bouton_sin = Button(bottom, height=3, width=5, text='sin', bg="#576574", borderwidth=4, command=self.sin, relief="raised")
         bouton_sin.grid(row=2, column=3, sticky=W, padx=2, pady=2)
 
-        bouton_cos = Button(bottom, height=3, width=5, text='cos', bg="cyan", borderwidth=4, command=self.cos, relief="raised")
+        bouton_cos = Button(bottom, height=3, width=5, text='cos', bg="#576574", borderwidth=4, command=self.cos, relief="raised")
         bouton_cos.grid(row=3, column=3, sticky=W, padx=2, pady=2)
 
-        bouton_tan = Button(bottom, height=3, width=5, text='tan', bg="cyan", borderwidth=4, command=self.tan, relief="raised")
+        bouton_tan = Button(bottom, height=3, width=5, text='tan', bg="#576574", borderwidth=4, command=self.tan, relief="raised")
         bouton_tan.grid(row=4, column=3, sticky=W, padx=2, pady=2)
 
-        boutonquit = Button(text="quit", bg="cyan",height=2, width=4, borderwidth=4, command=self.destroy)
+        boutonquit = Button(text="quit", bg="#ff9f43",height=2, width=4, borderwidth=4, command=self.destroy)
         boutonquit.pack(side=RIGHT, padx=1)
 
-        bouton_historic = Button(text="H", bg="cyan", height=2, width=4, borderwidth=4, command=self.hist)
+        bouton_historic = Button(text="⬆", bg="#ff9f43", height=2, width=4, borderwidth=4, command=self.hist)
         bouton_historic.pack(side=RIGHT, padx=1)
 
-        bouton_ang = Button(textvariable=self.ang, bg="cyan", height=2, width=4, borderwidth=4, command=self.angch)
+        bouton_ang = Button(textvariable=self.ang, bg="#ff9f43", height=2, width=4, borderwidth=4, command=self.angch)
         bouton_ang.pack(side=RIGHT, padx=1)
 
-        bouton_recap = Button(text="R", bg="cyan", height=2, width=4, borderwidth=4, command=self.msg)
+        bouton_recap = Button(text="📜", bg="#ff9f43", height=2, width=4, borderwidth=4, command=self.msg)
         bouton_recap.pack(side=LEFT, padx=1)
 
-        bouton_SUPP = Button(text="<=", bg="cyan", height=2, width=4, borderwidth=4, command=self.supp)
+        bouton_SUPP = Button(text="⬅", bg="#ff9f43", height=2, width=4, borderwidth=4, command=self.supp)
         bouton_SUPP.pack(side=RIGHT, padx=1)
 
 
